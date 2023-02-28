@@ -1,0 +1,208 @@
+a{
+	text-decoration: none;
+}
+
+p{
+	font-family: 'Poppins', sans-serif;
+}
+
+div.hat{
+	display: flex;
+	justify-content: space-around;
+	align-items: stretch;
+	background-color: #FFFFFF;
+	margin: 0;
+	width: 100%;
+}
+
+a.hat_a{
+	width: 20%;
+	color: #000;
+	margin-top: 7px;
+	margin-bottom: 7px;
+	font-size: 18px;
+	border-radius: 5px;
+}
+
+a.hat_a:hover{
+	background-color: #DDD;
+	color: #777;
+}
+
+div.hat_letter{
+	text-align: center;
+}
+
+p.hat_text{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+hr.hat_hr{
+	width: 100%;
+	height: 3px;
+	border: none;
+	background-color: #000;
+	color: #000;
+}
+
+label{
+	font-family: 'Poppins', sans-serif;
+}
+
+div.post_creating_field{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+div.post_creating_workspace{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	width: 50%;
+	outline: 2px solid #000;
+}
+
+div.add_pic{
+	outline: 1px solid #000;
+}
+
+div.post_text{
+	outline: 1px solid #000;
+	dislay: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+div.txt_ed_buttons{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+div.te_button{
+	width:  5%;
+	height: 5%;
+	border: 1px solid #000;
+	background-color: #DDD;
+	display:  flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+}
+
+div.te_button:hover{
+	color: #111;
+	background-color: #AAA;
+}
+
+div.txtarea{
+	width: 100%;
+}
+
+textarea.post_text_inp{
+	width: 90%;
+}
+
+p.preview_text{
+	width: 100%;
+	overflow-wrap: break-word;
+	word-break: break-all;
+}
+
+div.add_buttons{
+	outline: 1px solid #000;
+}
+
+div.save_post{
+	outline: 1px solid #000;
+}
+
+div.add_buttons{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+div.post_creating_result{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+}
+
+div.post_preview{
+	width: 60%;
+	padding: 10px;
+	outline: 2px solid #000;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+div.post_preview_pic{
+	width: 100%;
+	margin-bottom: 3px;
+}
+
+img.preview_pic{
+	width: 100%;
+}
+
+div.post_preview_text{
+	width: 100%;]
+}
+
+div.post_preview_buttons{
+	width: 100%;
+	margin-top: 3px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+div.buttons_str_pr{
+	width: 95%;
+	margin-top: 2px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
+a.pr_link{
+	width: 30%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+div.button_pr{
+	width: 100%;
+	height: 5%;
+	border: 1px solid #000;
+	background-color: #DDD;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+div.button_pr:hover{
+	color: #111;
+	background-color: #AAA;
+}
+
+p.btn_pr_txt{
+	align: center;
+	text-decoration: none;
+	color: #000;
+	overflow-wrap: break-word;
+	word-break: break-all;
+}

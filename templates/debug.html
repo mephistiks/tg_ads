@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>debug</title>
+</head>
+<body>
+<a href="/docs">api</a>
+<h1>test</h1>
+<form action="" onsubmit="sendMessage(event)">
+    <label>Token: <input type="text" id="token" autocomplete="off" value="jwt"/></label>
+    <button onclick="connect(event)">Connect</button>
+    <hr>
+    <label>Querry: <input type="text" id="querry" autocomplete="off"/></label>
+    <label>Type: <input type="text" id="type" autocomplete="off"/></label>
+    <button>Send</button>
+</form>
+<ul id='messages'>
+</ul>
+<script>
+    var ws = null;
+    function connect(event) {
+        var token = document.getElementById("token")
+        ws = new WebSocket("ws://localhost:8000/socket" + "/ws?token=" + token.value);
+        ws.onmessage = function(event) {
+            var messages = document.getElementById('messages')
+            var message = document.createElement('li')
+            var content = document.createTextNode(event.data)
+            message.appendChild(content)
+            messages.appendChild(message)
+        };
+        event.preventDefault()
+    }
+    function sendMessage(event) {
+        var input = document.getElementById("querry")
+        var q = document.getElementById("type")
+        const message = {
+            type: q.value,
+            data: input.value
+        }
+        console.log(message)
+        ws.send(JSON.stringify(message))
+        input.value = ''
+        event.preventDefault()
+    }
+</script>
+</body>
+</html>
