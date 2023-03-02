@@ -124,24 +124,6 @@ function btn_flow(id_btn){
 	buttons_ws_rendering();
 }
 
-function uploadPic(){
-    let file = document.getElementById('picInput').files[0];
-    if(file){
-        let formData = new FormData();
-        formData.append('file', file);
-        fetch('/upload', {
-               method: 'POST',
-               body: formData,
-             })
-             .then(response => {
-               console.log(response);
-             })
-             .catch(error => {
-               console.error(error);
-             });
-    }
-}
-
 function pic_flow() {
 	let preview = document.getElementById('pr_pic');
 	let file = document.getElementById('picInput').files[0];
@@ -155,4 +137,33 @@ function pic_flow() {
 	else{
 		preview.src = "";
 	}
+}
+
+function post_post(){
+	let pic_b64 = document.getElementById('pr_pic').src;
+	let post_name = document.getElementById('post_name').value;
+	let post_text = document.getElementById('txtar_inp').value;
+	let post_buttons = new Array;
+	for(let i = 0; i < buttons_array.length; i++){
+		post_buttons.push(new Array);
+		for(let j = 0; j < buttons_array[i].length; j++){
+			post_buttons[i].push({"text": buttons_array[i][j].name, "link": buttons_array[i][j].link});
+		}
+	}
+	let post_body = {
+		"img": pic_b64,
+		"post_name": post_name,
+		"post_text": post_text,
+		"buttons": post_buttons
+	};
+	///Добавь в кавычки ссылку на серв
+	let response = await fetch("", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify(post_body)
+	})
+	let result = await response.json();
+	alert(result.message);
 }

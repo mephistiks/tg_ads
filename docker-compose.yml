@@ -3,6 +3,7 @@ version: "3"
 services:
     fastapi:
         build: .
+        restart: on-failure
         networks:
             - niggers
         ports:
