@@ -151,7 +151,7 @@ function post_post(){
 		}
 	}
 	let post_body = {
-		"img": "qwe",
+		"img": pic_b64,
 		"post_name": post_name,
 		"post_text": post_text,
 		"buttons": post_buttons
