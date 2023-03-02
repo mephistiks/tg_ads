@@ -151,19 +151,30 @@ function post_post(){
 		}
 	}
 	let post_body = {
-		"img": pic_b64,
+		"img": "qwe",
 		"post_name": post_name,
 		"post_text": post_text,
 		"buttons": post_buttons
 	};
 	///Добавь в кавычки ссылку на серв
-	let response = await fetch("", {
-		method: 'POST',
+	///let response = fetch("{{url_for('api', path='/create_post')}}", {
+	/*
+	let response =  fetch('http://localhost:8000/api/create_post', {
+		method: "POST",
 		headers: {
+			'accept': 'application/json',
 			'Content-Type': 'application/json;charset=utf-8'
 		},
 		body: JSON.stringify(post_body)
-	})
-	let result = await response.json();
+	});
+	 */
+	let response =  fetch('http://127.0.0.1:8000/api/create_post', {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(post_body)
+	});
+	let result =  response.json;
 	alert(result.message);
 }
