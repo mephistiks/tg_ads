@@ -1,11 +1,16 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
 import cfg
 from routers import pages, api
 from aiogram import Dispatcher, Bot, executor
-app = FastAPI()
+
+app = FastAPI(
+    middleware=[Middleware(CORSMiddleware, allow_origins=["*"])]
+)
 
 app.include_router(pages.router)
 app.include_router(api.router, prefix="/api")

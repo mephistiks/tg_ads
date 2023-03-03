@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Poppins&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="../static/js/create_post_scripts.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='/js/create_post_scripts.js') }} "></script>
     <title>Создание поста</title>
 </head>
 <body>
@@ -46,6 +46,8 @@
             </div>
             <div class="save_post">
                 <label>Название поста</label>
+                <input type="text" name="post_name" id="post_name">
+                <input type="button" name="save_post" value="Сохранить пост" onclick="post_post()">
             </div>
         </div>
         <div class="post_creating_result">

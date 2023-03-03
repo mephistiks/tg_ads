@@ -20,6 +20,16 @@ async def send_post_to_channel(data_sc: models.post.PostSchema = Body(...)):
     await bot.send_message(data["chanel_id"], data["post"])
     pass
 
+@router.post("/create_post")
+async def create_new_post(data_sc: models.post.NewPostSchema = Body(...)):
+    try:
+        data = jsonable_encoder(data_sc)
+        print(data)
+    except BaseException as e:
+        print(e)
+    #await bot.send_message(data["chanel_id"], data["post"])
+    pass
+
 async def start_bot():
     #await bot.send_message(-1001827662376, """<b>qwe</b> <i>qwe</i> <s>qwe</s> <u>qwe</u> <a href='vk.com'>вк</a>""", )
     pass
