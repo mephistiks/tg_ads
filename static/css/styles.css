@@ -206,3 +206,7 @@ p.btn_pr_txt{
 	overflow-wrap: break-word;
 	word-break: break-all;
 }
+
+div.link_to_page{
+	visibility: hidden;
+}

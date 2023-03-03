@@ -156,3 +156,32 @@ function pic_flow() {
 		preview.src = "";
 	}
 }
+
+async function post_post(){
+	let pic_b64 = document.getElementById('pr_pic').src;
+	let post_name = document.getElementById('post_name').value;
+	let post_text = document.getElementById('txtar_inp').value;
+	let post_buttons = new Array;
+	for(let i = 0; i < buttons_array.length; i++){
+		post_buttons.push(new Array);
+		for(let j = 0; j < buttons_array[i].length; j++){
+			post_buttons[i].push({"text": buttons_array[i][j].name, "link": buttons_array[i][j].link});
+		}
+	}
+	let post_body = {
+		"img": pic_b64,
+		"post_name": post_name,
+		"post_text": post_text,
+		"buttons": post_buttons
+	};
+	///Добавь в кавычки ссылку на серв
+	let response = await fetch(document.getElementById("tag_for_copy_to_js").innerHTML, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json;charset=utf-8'
+		},
+		body: JSON.stringify(post_body)
+	})
+	let result = await response.json();
+	alert(result.message);
+}

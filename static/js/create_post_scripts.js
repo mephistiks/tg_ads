@@ -139,7 +139,7 @@ function pic_flow() {
 	}
 }
 
-function post_post(){
+async function post_post(){
 	let pic_b64 = document.getElementById('pr_pic').src;
 	let post_name = document.getElementById('post_name').value;
 	let post_text = document.getElementById('txtar_inp').value;
@@ -157,7 +157,7 @@ function post_post(){
 		"buttons": post_buttons
 	};
 	///Добавь в кавычки ссылку на серв
-	let response = await fetch("", {
+	let response = await fetch(document.getElementById("tag_for_copy_to_js").innerHTML, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8'
