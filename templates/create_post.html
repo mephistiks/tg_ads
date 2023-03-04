@@ -11,12 +11,12 @@
 </head>
 <body>
     <div class="hat">
-        <a href="list_posts.html" class="hat_a">
+        <a href="/list" class="hat_a">
             <div class="hat_letter">
                 <p class="hat_text">Список всех постов</p>
             </div>
         </a>
-        <a href="create_post.html" class="hat_a">
+        <a href="/create" class="hat_a">
             <div class="hat_letter">
                 <p class="hat_text">Создать новый пост</p>
             </div>
@@ -61,6 +61,9 @@
                 <div class="post_preview_buttons" id="pr_btns"></div>
             </div>
         </div>
+    </div>
+    <div class="link_to_page">
+        <p id= "tag_for_copy_to_js">{{ url_for('static', path='/css/styles.css') }}</p>
     </div>
     <script>window.onload = buttons_ws_rendering();</script>
 </body>

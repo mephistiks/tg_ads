@@ -18,6 +18,8 @@ app.mount("/static",
           StaticFiles(directory="static"),
           name="static")
 
+app.mount("/api", api.router, name = "api")
+
 @app.on_event("startup")
 async def start():
     try:

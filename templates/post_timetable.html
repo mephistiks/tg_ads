@@ -15,19 +15,22 @@
 	<title>Расписание поста</title>
 </head>
 <body>
-	<div class="hat">
-        <a href="list_posts.html" class="hat_a">
+    <div class="hat">
+        <a href="/list" class="hat_a">
             <div class="hat_letter">
                 <p class="hat_text">Список всех постов</p>
             </div>
         </a>
-        <a href="create_post.html" class="hat_a">
+        <a href="/create" class="hat_a">
             <div class="hat_letter">
                 <p class="hat_text">Создать новый пост</p>
             </div>
         </a>
     </div>
     <hr class="hat_hr">
+    <div>
+        Пример получаемой с сервера информации - id поста: {{some_data}}
+    </div>
     <div class="post_tt_ws">
     	<div class="post_creating_result">
             <div class="post_preview">
@@ -48,6 +51,6 @@
 			</div>
         </div>
     </div>
-    <script type="text/javascript" src="../static/js/calendar_scripts.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='/js/calendar_scripts.js') }}"></script>
 </body>
 </html>

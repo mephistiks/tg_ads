@@ -9,18 +9,42 @@
 	<title>Список всех постов</title>
 </head>
 <body>
-	<div class="hat">
-        <a href="list_posts.html" class="hat_a">
+    <div class="hat">
+        <a href="/list" class="hat_a">
             <div class="hat_letter">
                 <p class="hat_text">Список всех постов</p>
             </div>
         </a>
-        <a href="create_post.html" class="hat_a">
+        <a href="/create" class="hat_a">
             <div class="hat_letter">
                 <p class="hat_text">Создать новый пост</p>
             </div>
         </a>
     </div>
     <hr class="hat_hr">
+
+    <button onclick="get_p(event)">Get Posts</button>
+
+    <ul id='posts'>
+        <li> niggers</li>
+    </ul>
+    <script>
+        function add_element(name) {
+            let li = document.createElement('li');
+            li.textContent = name;
+            return li;
+        }
+        async function get_p(event) {
+            let response = await fetch('http://127.0.0.1:8000/api/posts', {
+                headers: {
+                    'accept': 'application/json'
+                }
+            });
+            let result = await response.text;
+            var posts = document.getElementById('posts')
+            posts.appendChild(add_element(result))
+        }
+
+    </script>
 </body>
 </html>

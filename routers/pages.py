@@ -19,4 +19,15 @@ async def create_page(request: Request):
         "create_post.html", {"request": request}
     )
 
+@router.get("/list")
+async def create_page(request: Request):
+    return templates.TemplateResponse(
+        "list_posts.html", {"request": request}
+    )
 
+@router.get("/calendar/{_id}/")
+async def create_page(request: Request, _id: int):
+    print(_id)
+    return templates.TemplateResponse(
+        "post_timetable.html", {"request": request, "some_data":_id}
+    )

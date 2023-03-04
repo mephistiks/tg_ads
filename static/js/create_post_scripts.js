@@ -157,13 +157,21 @@ async function post_post(){
 		"buttons": post_buttons
 	};
 	///Добавь в кавычки ссылку на серв
-	let response = await fetch(document.getElementById("tag_for_copy_to_js").innerHTML, {
+	let link_from_html = document.getElementById("tag_for_copy_to_js").innerHTML;
+	let link_ = "";
+	for(let i = 0, cntr = 0; i < link_from_html.length, cntr < 3; i++){
+		if(link_from_html[i] == "/")
+			cntr++;
+		link_ += link_from_html[i];
+	}
+	let response = await fetch(link_ + "api/create", {
 		method: 'POST',
 		headers: {
+			"accept": "application/json",
 			'Content-Type': 'application/json;charset=utf-8'
 		},
 		body: JSON.stringify(post_body)
 	})
-	let result = await response.json();
-	alert(result.message);
+	let result = await response.text;
+	alert(result);
 }
