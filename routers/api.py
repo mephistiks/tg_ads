@@ -48,9 +48,10 @@ async def create_new_post(data_sc: models.post.NewPostSchema = Body(...)):
 @router.get("/posts")
 async def get_posts():
     posts = [
-        {"name1":"http://link1.com"},
-        {"name2":"http://link2.com"}
+        {"name1": "http://link1.com"},
+        {"name2": "http://link2.com"}
     ]
+    #posts = json.dumps(posts)
     return posts
 """
         async function get_p(event) {
