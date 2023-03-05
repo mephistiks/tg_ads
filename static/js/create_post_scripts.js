@@ -157,13 +157,29 @@ async function post_post(){
 		"buttons": post_buttons
 	};
 	///Добавь в кавычки ссылку на серв
+<<<<<<< HEAD
 	let response = await fetch(document.getElementById("tag_for_copy_to_js").innerHTML, {
 		method: 'POST',
+=======
+	///let response = fetch("{{url_for('api', path='/create_post')}}", {
+	/*
+	let response =  fetch('http://localhost:8000/api/create_post', {
+		method: "POST",
+>>>>>>> 88baf92a3519f3769cd742705c25bb49449ca0e8
 		headers: {
+			'accept': 'application/json',
 			'Content-Type': 'application/json;charset=utf-8'
 		},
 		body: JSON.stringify(post_body)
-	})
-	let result = await response.json();
+	});
+	 */
+	let response =  fetch('http://127.0.0.1:8000/api/create_post', {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(post_body)
+	});
+	let result =  response.json;
 	alert(result.message);
 }
