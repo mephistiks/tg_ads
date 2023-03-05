@@ -45,6 +45,12 @@ async def create_new_post(data_sc: models.post.NewPostSchema = Body(...)):
     )
     pass
 
+
+@router.patch("/edit")
+async def edit():
+    ...
+
+
 @router.get("/posts")
 async def get_posts():
     posts = [
