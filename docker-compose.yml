@@ -2,12 +2,45 @@ version: "3"
 
 services:
     fastapi:
-        build: .
+        build: ./fastapi
         restart: on-failure
         networks:
             - niggers
         ports:
             - "8000:8000"
+
+    redis_exp:
+        command: "python main.py"
+        build: ./redis_exp
+        restart: on-failure
+        networks:
+            - niggers
+
+
+    redis:
+        build: ./redis
+        ports:
+            - "6500:6379"
+        networks:
+            - niggers
+
+
+    mongodb:
+        networks:
+            - niggers
+        build: ./mongodata/
+        restart: on-failure
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - MONGO_INITDB_ROOT_USERNAME=mongo
+            - MONGO_INITDB_ROOT_PASSWORD=mongo
+        volumes:
+            - ./mongodata:/data/db
+        ports:
+            - 27029:27017
+
+
 
 networks:
     niggers:
