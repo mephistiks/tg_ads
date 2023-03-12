@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='/css/styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Poppins&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static', path='/js/create_post_scripts.js') }} "></script>
+    <title>Создание поста</title>
+</head>
+<body>
+    <div class="hat">
+        <a href="/list" class="hat_a">
+            <div class="hat_letter">
+                <p class="hat_text">Список всех постов</p>
+            </div>
+        </a>
+        <a href="/create" class="hat_a">
+            <div class="hat_letter">
+                <p class="hat_text">Создать новый пост</p>
+            </div>
+        </a>
+    </div>
+    <hr class="hat_hr">
+    <div class="post_creating_field">
+        <div class="post_creating_workspace">
+            <div class="add_pic">
+                <label>Загрузить изображение</label>
+                <input type="file" id="picInput" name="file" onchange="pic_flow()">
+            </div>
+            <div class="post_text">
+                <div><label>Текст поста</label></div>
+                <div class="txt_ed_buttons">
+                    <div class="te_button" onclick="te_buttons('b')"><p><b>Ж</b></p></div>
+                    <div class="te_button" onclick="te_buttons('i')"><p><i>К</i></p></div>
+                    <div class="te_button" onclick="te_buttons('a')"><p>link</p></div>
+                    <div class="te_button" onclick="te_buttons('s')"><p><s>З</s></p></div>
+                    <div class="te_button" onclick="te_buttons('u')"><p><u>П</u></p></div>
+                </div>
+                <div class="txtarea"><textarea id="txtar_inp" rows="20" class="post_text_inp" onchange="txt_flow()"></textarea></div>
+            </div>
+            <div class="add_buttons">
+                <label>Кнопки</label>
+                <div class="post_buttons" id="ws_post_buttons"></div>
+            </div>
+            <div class="save_post">
+                <label>Название поста</label>
+                <input type="text" name="post_name" id="post_name">
+                <input type="button" name="save_post" value="Сохранить пост" onclick="post_post()">
+            </div>
+        </div>
+        <div class="post_creating_result">
+            <div class="post_preview">
+                <div class="post_preview_pic">
+                    <img class="preview_pic" id="pr_pic">
+                </div>
+                <div class="post_preview_text">
+                    <p id="pr_txt" class = "preview_text"></p>
+                </div>
+                <div class="post_preview_buttons" id="pr_btns"></div>
+            </div>
+        </div>
+    </div>
+    <div class="link_to_page">
+        <p id= "tag_for_copy_to_js">{{ url_for('static', path='/css/styles.css') }}</p>
+    </div>
+    <script>window.onload = buttons_ws_rendering();</script>
+</body>
+</html>
