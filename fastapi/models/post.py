@@ -1,4 +1,3 @@
-from bson import ObjectId
 from pydantic import BaseModel, Field
 
 
@@ -16,7 +15,7 @@ class NewPostSchema(BaseModel):
     img: str = Field(...)
     post_name: str = Field(...)
     post_text: str = Field(...)
-    buttons: list = Field(...)
+    buttons: list = Field()
 
     class Config:
         allow_population_by_field_name = True

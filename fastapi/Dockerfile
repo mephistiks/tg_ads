@@ -1,5 +1,14 @@
 FROM python:3.10
-ADD .. /code
-WORKDIR /code
-RUN pip install -r r.txt
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+
+WORKDIR /usr/src/code
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN pip install --no-cache-dir --upgrade pip setuptools
+COPY ./r.txt .
+RUN pip install --no-cache-dir -r r.txt
+
+
+
+COPY . .
