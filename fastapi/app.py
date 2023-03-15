@@ -1,3 +1,4 @@
+import dbq.mongo
 from fastapi import FastAPI
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
@@ -15,11 +16,15 @@ app.mount("/static",
           StaticFiles(directory="static"),
           name="static")
 
-app.mount("/api", api.router, name ="api")
+app.mount("/api", api.router, name="api")
+
 
 @app.on_event("startup")
 async def start():
     try:
         await api.start_bot()
+        mongo = dbq.mongo.MongoQueries()
+        await mongo.run()
+        api.mongo = mongo
     except BaseException as e:
         print(e)
