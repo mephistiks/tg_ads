@@ -1,6 +1,6 @@
 import json
-
-from aiogram import Dispatcher, Bot
+import base64
+from aiogram import Dispatcher, Bot, types
 from aiogram.utils import executor
 from fastapi import APIRouter, Request, status, Response, Body
 from fastapi.encoders import jsonable_encoder
@@ -23,14 +23,42 @@ async def index_ok():
     return Response("ok", status_code=status.HTTP_200_OK)
 
 
-@router.get("/send_post/{_id}")
+@router.post("/send_post")
 async def send_post_to_channel(
-        #        data_sc: models.post.PostSchema = Body(...)
-        _id: str
+        data_sc: models.post.PostSchema = Body(...),
 ):
     # data = jsonable_encoder(data_sc)
-    print(_id)
-    # await bot.send_message(data["chanel_id"], data["post"])
+    post = await mongo.get_post_by_id(data_sc.post_id)
+
+    kb = types.InlineKeyboardMarkup()
+    for i in post["buttons"]:
+        row_btns = (types.InlineKeyboardButton(j["text"], url=j["link"] if ("." in j["link"]) else "google.com") for j in i)
+        kb.row(*row_btns)
+
+    data = await utils.utls.get_img(post["img_name"])
+    #await bot.send_photo(chat_id=data_sc.chanel_id, photo=data.replace('data:image/jpeg;base64,', '').replace('data:image/png;base64,', ''), caption=post["post_text"], reply_markup=kb)
+    if data.startswith('data:image/jpeg;base64,'):
+        new_data = data.replace('data:image/jpeg;base64,', '')
+        imgdata = base64.b64decode(new_data)
+        filename = 'some_image.jpeg'
+        with open(filename, 'wb') as f:
+            f.write(imgdata)
+        print(kb)
+
+        #for j in i
+        with open(filename, "rb") as f:
+            await bot.send_photo(chat_id=data_sc.chanel_id, photo=f.read(), caption=post["post_text"], reply_markup=kb)
+    if data.startswith('data:image/png;base64,'):
+        new_data = data.replace('data:image/png;base64,', '')
+        imgdata = base64.b64decode(new_data)
+        filename = 'some_image.png'
+        with open(filename, 'wb') as f:
+            f.write(imgdata)
+        print(kb)
+
+        # for j in i
+        with open(filename, "rb") as f:
+            await bot.send_photo(chat_id=data_sc.chanel_id, photo=f.read(), caption=post["post_text"], reply_markup=kb)
     return "ok"
     pass
 
@@ -46,19 +74,6 @@ async def create_new_post(data_sc: models.post.NewPostSchema = Body(...)):
     print(_id)
     return _id
 
-    # await bot.send_message(data["chanel_id"], data["post"])
-    # return {"message": "ok", "status_code": status.HTTP_200_OK}
-    # message = json.dumps({
-    #    "message": "ok",
-    #    "2 kozla": "skolko?"
-    # })
-    # return Response(
-    #    message,
-    #    status_code=status.HTTP_200_OK
-    # )
-    # pass
-
-
 @router.patch("/edit")
 async def edit():
     ...
@@ -66,41 +81,21 @@ async def edit():
 
 @router.get("/posts")
 async def get_posts():
-    posts = [
-        {"name1": "http://link1.com"},
-        {"name2": "http://link2.com"}
-    ]
-    return posts
+    var = await mongo.list_posts()
+    return var
 
 
 @router.get("/get_post/{_id}")
-async def get_posts(_id:str):
+async def get_post(_id:str):
     post = await mongo.get_post_by_id(_id)
     print(_id)
     return post
 
 @router.get("/get_img/{_id}")
-async def get_posts(_id:str):
+async def get_img(_id:str):
     img = await utils.utls.get_img(_id)
     print(img)
     return img
-
-
-"""
-        async function get_p(event) {
-            let response = await fetch('http://127.0.0.1:8000/api/posts', {
-                headers: {
-                    'accept': 'application/json'
-                }
-            });
-            let result = await response.text;
-            var posts = document.getElementById('posts')
-            var post = document.createElement('li')
-            var content = document.createTextNode(result)
-            post.appendChild(content)
-            posts.appendChild(post)
-        }
-"""
 
 
 async def start_bot():

@@ -124,6 +124,24 @@ function btn_flow(id_btn){
 	buttons_ws_rendering();
 }
 
+function uploadPic(){
+    let file = document.getElementById('picInput').files[0];
+    if(file){
+        let formData = new FormData();
+        formData.append('file', file);
+        fetch('/upload', {
+               method: 'POST',
+               body: formData,
+             })
+             .then(response => {
+               console.log(response);
+             })
+             .catch(error => {
+               console.error(error);
+             });
+    }
+}
+
 function pic_flow() {
 	let preview = document.getElementById('pr_pic');
 	let file = document.getElementById('picInput').files[0];
@@ -157,27 +175,13 @@ async function post_post(){
 		"buttons": post_buttons
 	};
 	///Добавь в кавычки ссылку на серв
-	let link_from_html = document.getElementById("tag_for_copy_to_js").innerHTML;
-	let link_ = "";
-	for(let i = 0, cntr = 0; i < link_from_html.length, cntr < 3; i++){
-		if(link_from_html[i] == "/")
-			cntr++;
-		link_ += link_from_html[i];
-	}
-	let response = await fetch(link_ + "api/create", {
+	let response = await fetch(document.getElementById("tag_for_copy_to_js").innerHTML, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json;charset=utf-8'
 		},
 		body: JSON.stringify(post_body)
-	});
+	})
 	let result = await response.json();
-
-	var mydiv = document.getElementById("new_post");
-	var aTag = document.createElement('a');
-
-	aTag.setAttribute('href', link_ + "calendar/" + result)
-	aTag.textContent = post_name;
-	mydiv.appendChild(aTag)
-
+	alert(result.message);
 }

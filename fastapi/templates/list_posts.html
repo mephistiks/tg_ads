@@ -6,43 +6,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Poppins&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static', path='/js/list_posts.js') }}"></script>
 	<title>Список всех постов</title>
 </head>
 <body>
     {% include "hat.html" %}
 
-    <button onclick="get_p(event)">Get Posts</button>
 
-    <ul id='posts'>
-        <li> niggers</li>
-    </ul>
-    <script>
-        function add_element(name) {
-            let li = document.createElement('li');
-            li.textContent = name;
-            return li;
-        }
-        async function get_p(event) {
-            let r = await fetch('http://127.0.0.1:8000/api/posts', {
-                method: "GET",
-                headers: {
-                    'accept': 'application/json'
-                }
-            });
-            //for (let i = 0; i<2; i++){
-            //    console.log(r[i]);
-            //}
-            let q = await r.json();
-            //console.log(r);
-            console.log(q);
-            //console.log(r.body);
-            //console.log(await r.text());
-            //console.log(r.body);
-            //console.log(q);
 
-            var posts = document.getElementById('posts')
-            posts.appendChild(add_element(q.text))
-        }
+    <div id="posts">
 
-    </script>
+    </div>
+    <script>window.onload=get_p();</script>
 </body>
