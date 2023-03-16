@@ -12,8 +12,6 @@ templates = Jinja2Templates(directory="templates")
 #async def index():
 #    return Response("ok", status_code = status.HTTP_200_OK)
 
-
-
 @router.get("/")
 @router.get("/create")
 async def create_page(request: Request):
@@ -28,8 +26,8 @@ async def create_page(request: Request):
     )
 
 @router.get("/calendar/{_id}/")
-async def create_page(request: Request, _id: int):
-    print(_id)
+async def create_page(request: Request, _id: str):
+    #print(_id)
     return templates.TemplateResponse(
-        "post_timetable.html", {"request": request, "some_data":_id}
+        "post_timetable.html", {"request": request, "_id":_id}
     )

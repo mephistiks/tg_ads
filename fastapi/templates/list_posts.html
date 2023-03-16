@@ -9,19 +9,7 @@
 	<title>Список всех постов</title>
 </head>
 <body>
-    <div class="hat">
-        <a href="/list" class="hat_a">
-            <div class="hat_letter">
-                <p class="hat_text">Список всех постов</p>
-            </div>
-        </a>
-        <a href="/create" class="hat_a">
-            <div class="hat_letter">
-                <p class="hat_text">Создать новый пост</p>
-            </div>
-        </a>
-    </div>
-    <hr class="hat_hr">
+    {% include "hat.html" %}
 
     <button onclick="get_p(event)">Get Posts</button>
 

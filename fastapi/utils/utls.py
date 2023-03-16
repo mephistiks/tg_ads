@@ -9,6 +9,6 @@ async def save_img(img_str: str):
 
 
 async def get_img(name: str):
-    with open(f"{name}", "rb") as f:
+    with open(f"images/{name}", "rb") as f:
         resp = f.read()
     return resp.decode()

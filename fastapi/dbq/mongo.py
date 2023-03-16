@@ -1,3 +1,6 @@
+import hashlib
+import time
+
 import motor.motor_asyncio
 
 import cfg
@@ -11,17 +14,22 @@ class MongoQueries:
         self.db = client.data
 
     async def save_post(self, post_name, img_name, post_text, buttons):
+        tmp = (img_name + str(time.time())).encode()
+        _id = hashlib.md5(tmp).hexdigest()
         base = {
-            # "_id":
+            "_id": _id,
             "post_name": post_name,
             "img_name": img_name,
             "post_text": post_text,
             "buttons": buttons
         }
-        await self.db["posts"].insert_one(base)
+        var = await self.db["posts"].insert_one(base)
+        return var.inserted_id
         ...
 
     async def get_post_by_id(self, _id):
+        var = await self.db["posts"].find_one({"_id": _id})
+        return var
         ...
 
     async def get_post_by_name(self, _id):

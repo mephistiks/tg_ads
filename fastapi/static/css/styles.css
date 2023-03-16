@@ -63,18 +63,22 @@ div.post_creating_workspace{
 	align-items: stretch;
 	width: 50%;
 	outline: 2px solid #000;
+
 }
+
 
 div.add_pic{
 	outline: 1px solid #000;
+	padding: 5px;
 }
 
 div.post_text{
-	outline: 1px solid #000;
+
 	dislay: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-start;
+	padding: 5px;
 }
 
 div.txt_ed_buttons{
@@ -92,7 +96,8 @@ div.te_button{
 	display:  flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 5px;
+	border-radius: 3px;
+	margin-right: 5px;
 }
 
 div.te_button:hover{
@@ -114,19 +119,26 @@ p.preview_text{
 	word-break: break-all;
 }
 
-div.add_buttons{
-	outline: 1px solid #000;
-}
+
 
 div.save_post{
 	outline: 1px solid #000;
+	padding: 5px;
 }
 
+div.get_post{
+	outline: 1px solid #000;
+	padding: 5px;
+}
+
+
 div.add_buttons{
+	outline: 1px solid #000;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
+	padding: 5px;
 }
 
 div.post_creating_result{
@@ -209,4 +221,11 @@ p.btn_pr_txt{
 
 div.link_to_page{
 	visibility: hidden;
+}
+
+div.post_tt_ws{
+    dislay: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }

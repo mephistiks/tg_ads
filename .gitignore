@@ -1,6 +1,11 @@
 fastapi/images/*
 mongo/mongodata/*
+fastapi/.idea
+fastapi/.idea/*
+.idea/*
 
+fastapi/.idea/sonarlint/issuestore/index.pb
+fastapi/.idea/inspectionProfiles/profiles_settings.xml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -131,3 +136,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+

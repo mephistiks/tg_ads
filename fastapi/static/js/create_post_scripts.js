@@ -167,11 +167,17 @@ async function post_post(){
 	let response = await fetch(link_ + "api/create", {
 		method: 'POST',
 		headers: {
-			"accept": "application/json",
-			'Content-Type': 'application/json;charset=utf-8'
+			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(post_body)
-	})
-	let result = await response.text;
+	});
+	let result = await response.json();
+
+	var mydiv = document.getElementById("new_post");
+	var aTag = document.createElement('a');
+	aTag.setAttribute('href', link_ + "calendar/" + result)
+	aTag.textContent = post_text;
+	mydiv.appendChild(aTag)
+
 	alert(result);
 }

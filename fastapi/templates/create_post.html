@@ -10,19 +10,7 @@
     <title>Создание поста</title>
 </head>
 <body>
-    <div class="hat">
-        <a href="/list" class="hat_a">
-            <div class="hat_letter">
-                <p class="hat_text">Список всех постов</p>
-            </div>
-        </a>
-        <a href="/create" class="hat_a">
-            <div class="hat_letter">
-                <p class="hat_text">Создать новый пост</p>
-            </div>
-        </a>
-    </div>
-    <hr class="hat_hr">
+    {% include "hat.html" %}
     <div class="post_creating_field">
         <div class="post_creating_workspace">
             <div class="add_pic">
@@ -49,6 +37,9 @@
                 <input type="text" name="post_name" id="post_name">
                 <input type="button" name="save_post" value="Сохранить пост" onclick="post_post()">
             </div>
+            <div class="get_post" id="new_post">
+                <label>Пост: </label>
+            </div>
         </div>
         <div class="post_creating_result">
             <div class="post_preview">
@@ -66,5 +57,6 @@
         <p id= "tag_for_copy_to_js">{{ url_for('static', path='/css/styles.css') }}</p>
     </div>
     <script>window.onload = buttons_ws_rendering();</script>
+
 </body>
 </html>

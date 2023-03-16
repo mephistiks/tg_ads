@@ -7,6 +7,7 @@ from fastapi.encoders import jsonable_encoder
 
 import cfg
 import models.post
+import utils.utls
 from utils.utls import save_img
 import dbq
 
@@ -38,10 +39,12 @@ async def send_post_to_channel(
 async def create_new_post(data_sc: models.post.NewPostSchema = Body(...)):
     data = jsonable_encoder(data_sc)
     img_name = await save_img(data_sc.img)
-    await mongo.save_post(post_name=data_sc.post_name,
+    _id = await mongo.save_post(post_name=data_sc.post_name,
                           img_name=img_name,
                           post_text=data_sc.post_text,
                           buttons=data_sc.buttons)
+    print(_id)
+    return _id
 
     # await bot.send_message(data["chanel_id"], data["post"])
     # return {"message": "ok", "status_code": status.HTTP_200_OK}
@@ -68,6 +71,19 @@ async def get_posts():
         {"name2": "http://link2.com"}
     ]
     return posts
+
+
+@router.get("/get_post/{_id}")
+async def get_posts(_id:str):
+    post = await mongo.get_post_by_id(_id)
+    print(_id)
+    return post
+
+@router.get("/get_img/{_id}")
+async def get_posts(_id:str):
+    img = await utils.utls.get_img(_id)
+    print(img)
+    return img
 
 
 """
