@@ -3,8 +3,9 @@ from pydantic import BaseModel, Field
 
 class PostSchema(BaseModel):
     chanel_id: int = Field(...)
-    post: str = Field(...)
-    delay: int = Field(...)
+    post_id: str = Field(...)
+    date: str = Field()
+    time: str = Field()
 
     class Config:
         allow_population_by_field_name = True

@@ -1,21 +1,29 @@
-function send_dt(){
+async function send_dt(){
+    let host = document.location.origin;
+    let _id = document.location.pathname.split("/")[2];
     let date = document.getElementById("date").value;
     let time = document.getElementById("time").value;
-    console.log(date);
-    console.log(time);
+    let data_to_send = {
+        "chanel_id":  "test1",
+        "post_id": _id,
+        "date": date,
+        "time": time
+    };
+    let response = await fetch(host + "/api/send_post/", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+        body: JSON.stringify(data_to_send)
+	});
+    alert("Пост отправлен")
 }
 
 async function render_preview(){
     //запрос
-    let link_from_html = document.getElementById("tag_for_copy_to_js").innerHTML;
-    let post_id = document.getElementById("post_id").innerHTML;
-	let link_ = "";
-	for(let i = 0, cntr = 0; i < link_from_html.length, cntr < 3; i++){
-		if(link_from_html[i] == "/")
-			cntr++;
-		link_ += link_from_html[i];
-	}
-	let response = await fetch(link_ + "api/get_post/" + post_id, {
+    let host = document.location.origin
+    let lnk = document.location.pathname
+	let response = await fetch(host + "/api/get_post/" + lnk.split("/")[2], {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
@@ -23,34 +31,19 @@ async function render_preview(){
 	});
 	let result = await response.json();
     console.log(result)
-    let img = await fetch(link_ + "api/get_img/" + result["img_name"], {
+    let img = await fetch(host + "/api/get_img/" + result["img_name"], {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
 		}
 	});
-    //console.log()
     result["img"] = await img.json();
     let post = result;
-    //let post = {
-    //    "img": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABDSURBVChTtcyxEQAwBIXhlEZQGtEWRlbKu5BjgOTv+I4lIutbcWNmjERU86kZkAdmVqvJqpo8HzS7ezKq1WRU+IgjNjQ7kDFj+9yaAAAAAElFTkSuQmCC",
-    //    "post_name": "имя поста",
-    //    "post_text": "<s>Вставьте сюда текст</s>\n<u>Вставьте сюда текст</u><b>Вставьте сюда текст</b>",
-    //    "buttons": [
-    //        [
-    //            {"text": "текст1", "link": "https://google.com"},
-    //            {"text": "текст2", "link": "https://google.com"}
-    //        ],
-    //        [
-    //            {"text": "текст3", "link": "https://google.com"}
-    //        ]
-    //    ]
-    //}
     document.getElementById('pr_pic').setAttribute('src', post["img"]);
     let text = post["post_text"];
     let ret_text = "";
     for(let i = 0; i < text.length; i++){
-        if(text[i] == "\n"){
+        if(text[i] === "\n"){
             ret_text += "<br>"
         }
         else{

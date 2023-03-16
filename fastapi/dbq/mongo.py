@@ -34,3 +34,9 @@ class MongoQueries:
 
     async def get_post_by_name(self, _id):
         ...
+
+    async def list_posts(self, offset: int = 0):
+        var = await self.db["posts"].find({}, {"_id":1, "post_name":1}).to_list(offset+100)
+        print(var)
+        return var
+        ...
