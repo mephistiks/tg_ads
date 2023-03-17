@@ -31,7 +31,7 @@ async function get_p() {
     for(let i = 0; i < q.length; i++){
         console.log(q[i]);
 
-        posts.innerHTML += "<a href='calendar/"+ q[i][Object.keys(q[i])[0]] + "'<p>" + q[i][Object.keys(q[i])[1]] + "</p></a>";
+        posts.innerHTML += "<a href='calendar/"+ q[i][Object.keys(q[i])[0]] + "'><div class='post_in_list'><p>" + q[i][Object.keys(q[i])[1]] + "</p></div></a>";
         ///posts.innerHTML += "<p>" + q[i][Object.keys(q[i])[0]]  + "</p>";
     }
 }

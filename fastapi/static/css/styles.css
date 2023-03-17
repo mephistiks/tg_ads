@@ -3,7 +3,7 @@ a{
 }
 
 p{
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Arial', sans-serif;
 }
 
 div.hat{
@@ -224,8 +224,48 @@ div.link_to_page{
 }
 
 div.post_tt_ws{
-    dislay: flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+}
+
+div.tt_workspace{
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: flex-start;
+}
+
+div.dt_div{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+div.dt_row{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+div.dt{
+	padding: 2px;
+}
+
+div.list_of_posts{
+	width: 50%
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+div.post_in_list{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

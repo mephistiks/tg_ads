@@ -29,17 +29,26 @@
             </div>
         </div>
         <div class="tt_workspace">
-        	<div class="dt">
-                <input type="date" id="date">
-                <input type="time" id="time">
+            <div class="dt_div">
+                <div class="dt_row" id="dt_row"></div>
+                <input type="button" value="+" onclick="add_dt()">
             </div>
-            <input type="button" value="Сохранить" onclick="send_dt()">
+            <div class="ch_div">
+                <div class="ptt_ch_btns">
+                    <input type="button" value="Выбрать всё" onclick="choose_all()">
+                    <input type="button" value="Очистить всё" onclick="clear_all()">
+                </div>
+                <div class="ptt_ch_chbxs" id="ch">
+                    
+                </div>
+            </div>
         </div>
     </div>
+    <input type="button" value="Сохранить" onclick="send_data()">
     <div class="link_to_page">
         <p id= "post_id">{{ _id }}</p>
         <p id= "tag_for_copy_to_js">{{ url_for('static', path='/css/styles.css') }}</p>
     </div>
-    <script>window.onload = render_preview();</script>
+    <script>window.onload = renders();</script>
 </body>
 </html>
