@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+fastapi/.idea/sonarlint/issuestore/index.pb
+fastapi/.idea/sonarlint/issuestore/index.pb
+*.pb
+fastapi/.idea/sonarlint/issuestore/index.pb
