@@ -4,7 +4,7 @@ async function send_dt(){
     let date = document.getElementById("date").value;
     let time = document.getElementById("time").value;
     let data_to_send = {
-        "chanel_id":  "test1",
+        "chanel_id": -1001827662376,
         "post_id": _id,
         "date": date,
         "time": time

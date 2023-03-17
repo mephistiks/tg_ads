@@ -1,4 +1,5 @@
 import dbq.mongo
+import dbq.red
 from fastapi import FastAPI
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
@@ -16,6 +17,10 @@ app.mount("/static",
           StaticFiles(directory="static"),
           name="static")
 
+app.mount("/images",
+          StaticFiles(directory="images"),
+          name="images")
+
 app.mount("/api", api.router, name="api")
 
 
@@ -26,5 +31,8 @@ async def start():
         mongo = dbq.mongo.MongoQueries()
         await mongo.run()
         api.mongo = mongo
+        rds = dbq.red.RedisQueries()
+        await rds.run()
+        api.rds = rds
     except BaseException as e:
         print(e)
