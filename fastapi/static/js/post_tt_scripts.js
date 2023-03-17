@@ -1,3 +1,24 @@
+async function send_dt(){
+    let host = document.location.origin;
+    let _id = document.location.pathname.split("/")[2];
+    let date = document.getElementById("date").value;
+    let time = document.getElementById("time").value;
+    let data_to_send = {
+        "chanel_id": -1001827662376,
+        "post_id": _id,
+        "date": date,
+        "time": time
+    };
+    let response = await fetch(host + "/api/send_post/", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+        body: JSON.stringify(data_to_send)
+	});
+    alert("Пост отправлен")
+}
+
 async function render_preview(){
     //запрос
     let host = document.location.origin
