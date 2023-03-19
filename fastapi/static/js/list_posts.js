@@ -1,37 +1,7 @@
-function add_element(name) {
-    let li = document.createElement('li');
-    li.textContent = name;
-    return li;
-}
-async function get_p() {
-    let r = await fetch('http://127.0.0.1:8000/api/posts', {
-        method: "GET",
-        headers: {
-            'accept': 'application/json'
-        }
-    });
-    //for (let i = 0; i<2; i++){
-    //    console.log(r[i]);
-    //}
-    let q = await r.json();
-    //console.log(r);
-    console.log(q);
-    //console.log(r.body);
-    //console.log(await r.text());
-    //console.log(r.body);
-    //console.log(q);
-    /*
-    * for i in q:
-    *   var posts = document.getElementById('posts')
-        posts.appendChild(add_element(i))
-    * */
-    //var posts = document.getElementById('posts')
-    //posts.appendChild(add_element())
-    let posts = document.getElementById('posts');
-    for(let i = 0; i < q.length; i++){
-        console.log(q[i]);
+let loC = new Array;
+loC = [{"_id": 0, "name": "title0", "tg_id": 1000000000, "ref": "ref0", "cond": "const"},
+       {"_id": 1, "name": "title1", "tg_id": 1000000001, "ref": "ref1", "cond": "const"},
+       {"_id": 2, "name": "title2", "tg_id": 1000000002, "ref": "ref2", "cond": "const"},
+       {"_id": 3, "name": "title3", "tg_id": 1000000003, "ref": "ref3", "cond": "const"}
+      ];
 
-        posts.innerHTML += "<a href='calendar/"+ q[i][Object.keys(q[i])[0]] + "'><div class='post_in_list'><p>" + q[i][Object.keys(q[i])[1]] + "</p></div></a>";
-        ///posts.innerHTML += "<p>" + q[i][Object.keys(q[i])[0]]  + "</p>";
-    }
-}

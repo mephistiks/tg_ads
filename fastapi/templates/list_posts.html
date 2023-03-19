@@ -7,15 +7,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Poppins&display=swap" rel="stylesheet">
     <script type="text/javascript" src="{{ url_for('static', path='/js/list_posts.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='/js/list_posts_fetch.js') }}"></script>
 	<title>Список всех постов</title>
 </head>
 <body>
     {% include "hat.html" %}
 
 
-
-    <div id="posts" class="list_of_posts">
-        
+    <div class="lp_ws">
+        <div id="posts" class="list_of_posts"></div>
+        <div class="chanels_workspace">
+            <div class="save_chngs" onclick="save_changes()"><p>Сохранить изменения</p></div>
+            <div class="col_titles">
+                <div class="col_tit"><p>Название канала</p></div>
+                <div class="col_tit"><p>id канала</p></div>
+                <div class="col_tit"><p>реферальный код</p></div>
+            </div>
+            <div class="chanels_col">
+                <div class="chanel_ws">
+                    <input type="text" id="name0">
+                    <input type="text" id="tgid0">
+                    <input type="text" id="refc0">
+                    <input type="button" value="Изм.">
+                    <input type="button" value="X">
+                </div>
+            </div>
+            <input type="button" value="+" onclick="add_chanel()">
+        </div>
     </div>
     <script>window.onload=get_p();</script>
 </body>
