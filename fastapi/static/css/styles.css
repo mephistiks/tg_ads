@@ -323,7 +323,42 @@ div.chanels_col{
 	align-items: center;
 }
 
-div.chanel_ws{
+div.chanel_ws_const{
 	margin-top: 4px;
 	margin-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #5B61FF;
+}
+
+div.chanel_ws_delete{
+	margin-top: 4px;
+	margin-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #FF5C5C;
+}
+
+div.chanel_ws_modify{
+	margin-top: 4px;
+	margin-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #DBE829;
+}
+
+div.chanel_ws_add{
+	margin-top: 4px;
+	margin-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #3CE829;
 }
