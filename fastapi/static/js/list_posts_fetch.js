@@ -5,16 +5,7 @@ async function get_p() {
             'accept': 'application/json'
         }
     });
-    //for (let i = 0; i<2; i++){
-    //    console.log(r[i]);
-    //}
     let q = await r.json();
-    //console.log(r);
-    console.log(q);
-    //console.log(r.body);
-    //console.log(await r.text());
-    //console.log(r.body);
-    //console.log(q);
     /*
     * for i in q:
     *   var posts = document.getElementById('posts')
