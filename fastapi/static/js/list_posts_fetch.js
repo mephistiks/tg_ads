@@ -22,36 +22,14 @@ async function get_p() {
     * */
     //var posts = document.getElementById('posts')
     //posts.appendChild(add_element())
-    let posts = document.getElementById('posts');
-    for(let i = 0; i < q.length; i++){
-        console.log(q[i]);
-
-        posts.innerHTML += "<a href='calendar/"+ q[i][Object.keys(q[i])[0]] + "'><div class='post_in_list'><p>" + q[i][Object.keys(q[i])[1]] + "</p></div></a>";
-        ///posts.innerHTML += "<p>" + q[i][Object.keys(q[i])[0]]  + "</p>";
-    }
+    render_posts(q);
 }
 
 async function get_chanels(){
     //тута запрос и заполнение массива loC(здесь cond везде будет const) а ещё удали хуйню в начале list_posts.js
 }
 
-async function save_changes(){
-    let delete_array = new Array;
-    let modify_array = new Array;
-    let add_array = new Array;
-    for(let i = 0; i < loC.length; i++){
-        if(loC[i]["cond"] == "delete")
-            delete_array.push(loC[i]["_id"]);
-        else if(loC[i]["cond"] == "modify")
-            modify_array.push({"_id": loC[i]["_id"], "name": loC[i]["name"], "tg_id": loC[i]["tg_id"], "ref": loC[i]["ref"]});
-        else if(loC[i]["cond"] == "add")
-            add_array.push({"_id": loC[i]["_id"], "name": loC[i]["name"], "tg_id": loC[i]["tg_id"], "ref": loC[i]["ref"]});
-    }
-    let data_to_send = {
-        "delete": delete_array,
-        "modify": modify_array,
-        "add": add_array
-    };
+async function send_save_changes(data_to_send){
     console.log(data_to_send);
     //здесь отправка данных на сервер
 }

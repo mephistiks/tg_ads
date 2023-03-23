@@ -1,5 +1,5 @@
 //Эта по идее не нужна
-async function send_dt(){
+/*async function send_dt(){
     let host = document.location.origin;
     let _id = document.location.pathname.split("/")[2];
     let date = document.getElementById("date").value;
@@ -18,9 +18,9 @@ async function send_dt(){
         body: JSON.stringify(data_to_send)
 	});
     alert("Пост отправлен")
-}
+}*/
 
-async function render_preview(){
+async function get_preview(){
     //запрос
     let host = document.location.origin
     let lnk = document.location.pathname
@@ -40,30 +40,7 @@ async function render_preview(){
     });
     result["img"] = await img.json();
     let post = result;
-    document.getElementById('pr_pic').setAttribute('src', post["img"]);
-    let text = post["post_text"];
-    let ret_text = "";
-    for(let i = 0; i < text.length; i++){
-        if(text[i] === "\n"){
-            ret_text += "<br>"
-        }
-        else{
-            ret_text += text[i];
-        }
-    }
-    document.getElementById('pr_txt').innerHTML = ret_text;
-    el = document.getElementById('pr_btns');
-    let content = '';
-    let buttons_array = post["buttons"];
-    for(let i = 0; i < buttons_array.length; i++){
-        content += "<div class='buttons_str_pr'>";
-        for(let j = 0; j < buttons_array[i].length; j++){
-            content += "<a class='pr_link' href='" + buttons_array[i][j]["link"] + "' target='_blank'>";
-            content += "<div class='button_pr'><p class='btn_pr_txt'>" + buttons_array[i][j]["text"] + "</p></div></a>";
-        }
-        content += "</div>";
-    }
-    el.innerHTML = content;
+    render_preview(post);
 }
 
 ch_array = ["title1", "title2", "title3", "title4"];    //del
@@ -76,18 +53,8 @@ async function get_list_of_chanels(){
         chbx_array.push(false);
 }
 
-async function send_data(){
-    let host = document.location.origin;
-    let _id = document.location.pathname.split("/")[2];
-    let chanel_ids = new Array;
-    for(let i = 0; i < ch_array.length; i++)
-        if(chbx_array[i])
-            chanel_ids.push(ch_array[i]);
-    let data_to_send = {
-        "chanel_ids":  chanel_ids,
-        "post_id": _id,
-        "dts": dt_array
-    };
+async function _send_data(){
+
     let response = await fetch(host + "/api/send_post/", {
         method: 'POST',
         headers: {

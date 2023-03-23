@@ -1,3 +1,13 @@
+function render_posts(q){
+    let posts = document.getElementById('posts');
+    for(let i = 0; i < q.length; i++){
+        console.log(q[i]);
+
+        posts.innerHTML += "<a href='calendar/"+ q[i][Object.keys(q[i])[0]] + "'><div class='post_in_list'><p>" + q[i][Object.keys(q[i])[1]] + "</p></div></a>";
+        ///posts.innerHTML += "<p>" + q[i][Object.keys(q[i])[0]]  + "</p>";
+    }
+}
+
 let loC = new Array;
 loC = [{"_id": 0, "name": "title0", "tg_id": 1000000000, "ref": "ref0", "cond": "const"},
        {"_id": 1, "name": "title1", "tg_id": 1000000001, "ref": "ref1", "cond": "const"},
@@ -98,4 +108,24 @@ function change_field(id_str){
 function renders(){
     render_chanels_ws();
     get_p();
+}
+
+function save_changes(){
+    let delete_array = new Array;
+    let modify_array = new Array;
+    let add_array = new Array;
+    for(let i = 0; i < loC.length; i++){
+        if(loC[i]["cond"] == "delete")
+            delete_array.push(loC[i]["_id"]);
+        else if(loC[i]["cond"] == "modify")
+            modify_array.push({"_id": loC[i]["_id"], "name": loC[i]["name"], "tg_id": loC[i]["tg_id"], "ref": loC[i]["ref"]});
+        else if(loC[i]["cond"] == "add")
+            add_array.push({"_id": loC[i]["_id"], "name": loC[i]["name"], "tg_id": loC[i]["tg_id"], "ref": loC[i]["ref"]});
+    }
+    let data_to_send = {
+        "delete": delete_array,
+        "modify": modify_array,
+        "add": add_array
+    };
+    send_save_changes(data_to_send);
 }
