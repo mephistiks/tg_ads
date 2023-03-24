@@ -24,12 +24,3 @@ async function get_p() {
     //posts.appendChild(add_element())
     render_posts(q);
 }
-
-async function get_chanels(){
-    //тута запрос и заполнение массива loC(здесь cond везде будет const) а ещё удали хуйню в начале list_posts.js
-}
-
-async function send_save_changes(data_to_send){
-    console.log(data_to_send);
-    //здесь отправка данных на сервер
-}
