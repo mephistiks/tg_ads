@@ -1,5 +1,7 @@
 async function send_post_post(post_body){
-	let response = await fetch(link_ + "api/create", {
+    let host = document.location.origin
+    let lnk = document.location.pathname
+	let response = await fetch(host + "api/create", {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

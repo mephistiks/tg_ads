@@ -138,3 +138,5 @@ dmypy.json
 .pyre/
 
 
+fastapi/some_image.png
+fastapi/some_image.jpeg

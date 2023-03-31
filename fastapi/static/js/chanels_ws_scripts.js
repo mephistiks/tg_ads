@@ -1,8 +1,8 @@
 let loC = new Array;
-loC = [{"_id": 0, "name": "title0", "tg_id": 1000000000, "ref": "ref0", "cond": "const"},
-       {"_id": 1, "name": "title1", "tg_id": 1000000001, "ref": "ref1", "cond": "const"},
-       {"_id": 2, "name": "title2", "tg_id": 1000000002, "ref": "ref2", "cond": "const"},
-       {"_id": 3, "name": "title3", "tg_id": 1000000003, "ref": "ref3", "cond": "const"}
+loC = [{"_id": "43c209841309843c", "name": "title0", "tg_id": 1000000000, "ref": "ref0", "cond": "const"},
+       {"_id": "0c5948m3523c089", "name": "title1", "tg_id": 1000000001, "ref": "ref1", "cond": "const"},
+       {"_id": "0r9302r98vdf", "name": "title2", "tg_id": 1000000002, "ref": "ref2", "cond": "const"},
+       {"_id": "23r0309rc3c", "name": "title3", "tg_id": 1000000003, "ref": "ref3", "cond": "const"}
       ]; //эту хуйню надо удалить, это я для себя делал
 
 function render_chanels_ws(){

@@ -106,15 +106,15 @@ function send_data(){
         if(chbx_array[i])
             chanel_ids.push(ch_array[i]);
     let data_to_send = {
-        "chanel_ids":  chanel_ids,
+        "channels_id":  chanel_ids,
         "post_id": _id,
-        "dts": dt_array
+        "times": dt_array
     };
     _send_data(data_to_send);
 }
 
-function renders(){
-    //get_list_of_chanels();
-    get_preview();
+async function renders(){
+    await get_list_of_chanels();
     render_chbxs();
+    await get_preview();
 }

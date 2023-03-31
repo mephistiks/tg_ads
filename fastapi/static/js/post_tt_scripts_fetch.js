@@ -43,19 +43,30 @@ async function get_preview(){
     render_preview(post);
 }
 
-ch_array = ["title1", "title2", "title3", "title4"];    //del
-for(let i = 0; i < ch_array.length; i++)                //del
-    chbx_array.push(false);                             //del
+//ch_array = ["title1", "title2", "title3", "title4"];    //del
+//for(let i = 0; i < ch_array.length; i++)                //del
+//    chbx_array.push(false);                             //del
 
 async function get_list_of_chanels(){
+    let host = document.location.origin;
+    //let response = await fetch(host + "/api/get_channels/", {
+    let response = await fetch(host + "/api/get_channels_array/", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    let q = await response.json();
+    ch_array = q;
     //ебани тут запрос пж и запиши каналы в массив ch_array, удали строчки, после которых идут слэши, и раскомменть строчку в функции renders()
     for(let i = 0; i < ch_array.length; i++)
         chbx_array.push(false);
 }
 
-async function _send_data(){
-
-    let response = await fetch(host + "/api/send_post/", {
+async function _send_data(data_to_send){
+    let host = document.location.origin;
+    console.log(data_to_send)
+    let response = await fetch(host + "/api/create_tasks/", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
