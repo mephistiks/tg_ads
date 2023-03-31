@@ -122,7 +122,8 @@ async def get_chanels():
 
 @router.get("/get_channels_array")
 async def get_chanels_array():
-    var = await mongo.list_channels_array()
+    var = await mongo.list_channels()
+
     return var
 
 @router.patch("/edit")

@@ -46,7 +46,8 @@ class MongoQueries:
 
     async def list_channels(self) -> list:
         var = await self.db["channels"].find({}, {"name": 1, "_id": 0}).to_list(200)
-        return var
+        response = [i["name"] for i in var]
+        return response
 
     async def get_channel_by_tg_id(self, *, tg_id) -> dict:
         var = await self.db["channels"].find_one({"tg_id": tg_id})
@@ -136,3 +137,4 @@ class MongoQueries:
         print(_id)
         var = await self.db["tasks"].find_one({"_id": _id})
         return var
+

@@ -12,10 +12,6 @@ Dockerfile,6\6\6651ddff6eb82c840ced7c1dddee15c6e1913dd4
 app.py,1\3\13cce7fd076299c81b4986166f3d822791c9490e
 @
 routers/pages.py,f\8\f8dba400a31313a7171c1e6b8d1776a2a16f4080
-V
-&static/js/create_post_scripts_fetch.js,c\3\c362a2e4c86abcf6f6f89578e6b14686111f37b3
-J
-templates/create_post.html,c\f\cfa268fd596c1df9f143381a0c086670f1eaeef2
 P
  templates/chanels_workspace.html,e\4\e444fd3154b52d1ea0da08564f3836931a9e18f1
 I
