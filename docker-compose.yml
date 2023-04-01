@@ -16,7 +16,10 @@ services:
             - redis
             - mongodb
 
+
     redis_exp:
+        environment:
+            - TZ=Russia/Moscow
         command: "python main.py"
         build: ./redis_exp
         restart: on-failure

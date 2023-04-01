@@ -36,7 +36,6 @@ function del_dt(id_s){
 
 let ch_array = new Array;
 let chbx_array = new Array;
-
 function render_chbxs(){
     let el = document.getElementById('ch');
     content = "";

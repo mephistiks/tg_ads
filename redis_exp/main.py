@@ -2,6 +2,13 @@ import redis
 import time
 import requests
 
+#debug = 1, prod = 0
+type = 0
+if type:
+    base_link = "http://127.0.0.1:9898/api/complete_task_by_task_id"
+else:
+    base_link = "http://fastapi:8000/api/complete_task_by_task_id"
+
 print("reids exp started")
 r = redis.StrictRedis("redis", 6379)
 pubsub = r.pubsub()
@@ -11,6 +18,6 @@ for msg in pubsub.listen():
     #print(time.time(), msg)
     #print(msg['data'])
     try:
-        a = requests.get(f"http://fastapi:8000/api/complete_task_by_task_id/{msg['data'].decode()}")
+        a = requests.get(f"{base_link}/{msg['data'].decode()}")
     except BaseException as e:
         print(e)

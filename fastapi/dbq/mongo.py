@@ -13,8 +13,19 @@ class MongoQueries:
     async def run(self) -> None:
         client = motor.motor_asyncio.AsyncIOMotorClient(cfg.mongodb_link)
         self.db = client.data
+
         # try:
         #    self.db["test"]
+
+        try:
+            await self.db["test"].insert_one({"_id":1})
+        except pymongo.errors.DuplicateKeyError:
+            print("OK")
+        except pymongo.errors.ConnectionFailure as e:
+            raise e
+        except BaseException as e:
+            raise e
+
 
     async def stop(self) -> None:
         ...
@@ -87,6 +98,7 @@ class MongoQueries:
             print(i)
         return 0
 
+
     async def update_channels(self, *, delete: list, add: list, modify: list) -> int:
         errors = {"exists": []}
         for item in delete:
@@ -103,6 +115,9 @@ class MongoQueries:
         for item in modify:
             tg_id = item["tg_id"]
             result = await self.db["channels"].update_one({"tg_id": tg_id}, {"$set": item})
+
+        return errors
+
 
     async def create_task(self, *, post_id, channels_id: list, dates: list) -> list:
         name = hashlib.md5((str(post_id) + str(channels_id) + str(dates)).encode()).hexdigest()
@@ -129,6 +144,7 @@ class MongoQueries:
             )
         return response
 
+
     async def get_task_id(self, _id):
         var = await self.db["redis"].find_one({"_id": _id})
         return var
@@ -137,4 +153,12 @@ class MongoQueries:
         print(_id)
         var = await self.db["tasks"].find_one({"_id": _id})
         return var
+
+
+    async def get_task(self, _id):
+        var = await self.db["redis"].find_one({"_id":_id})
+        task_id = var["task_id"]
+        var2 = await self.db["tasks"].find_one({"_id": task_id})
+        return var2
+
 

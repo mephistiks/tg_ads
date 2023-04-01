@@ -2,15 +2,21 @@ from pydantic import BaseModel, Field
 
 
 class PostSchema(BaseModel):
-    chanel_id: int = Field(...)
+    channel_id: int = Field(...)
     post_id: str = Field(...)
-    date: str = Field()
-    time: str = Field()
+    id_type: str = Field(...)
+
 
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
 
+class PostSchemaManyChannel(BaseModel):
+    channels_id: list = Field(...)
+    post_id: str = Field(...)
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
 
 class Calendar(BaseModel):
     channels_id: list = Field(...)

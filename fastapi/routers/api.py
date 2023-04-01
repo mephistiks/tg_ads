@@ -28,9 +28,17 @@ kb = None
 """
 
 
-async def send_post(*, tg_name: str, post: dict):
-    _channel = await mongo.get_channel_by_name(name=tg_name)
-    post = await mongo.get_post_by_id(post)
+async def send_post(*, tg: str | int, post_id: str, id_type: str = "tg"):
+    match id_type:
+        case "tg":
+            _channel = await mongo.get_channel_by_tg_id(tg_id=tg)
+        case "_id":
+            _channel = await mongo.get_channel_by_id(_id=tg)
+        case "name":
+            _channel = await mongo.get_channel_by_name(name=tg)
+        case _:
+            raise Exception("channel id type error")
+    post = await mongo.get_post_by_id(post_id)
     tg_id = _channel.get("tg_id")
     ref = _channel.get("ref")
     text = post["post_text"].replace("{}", ref or "")
@@ -51,32 +59,26 @@ async def send_post(*, tg_name: str, post: dict):
 
 
 @router.post("/send_post")
-async def send_post_to_channel(
+async def send_post_to_channel_handler(
         data_sc: models.post.PostSchema = Body(...),
 ):
-    await bot.send_message(chat_id="qwdjqwjdlwjdl", text="test")
-    errors = []
-    for i in data_sc.tg_id:
-        print(data_sc)
-        post = await mongo.get_post_by_id(data_sc.post_id)
-        try:
-            await send_post(tg_id=i, post=post)
-        except BaseException as e:
-            errors.append({"tg_id": i, "error": e})
-    if len(errors) == 0:
-        return Response(None, status_code=status.HTTP_200_OK)
-    return Response(content=str({"errors": errors}), status_code=status.HTTP_200_OK)
+    post_id = data_sc.post_id
+    channel_id = data_sc.channel_id
+    id_type = data_sc.type
+    await send_post(tg=channel_id, post_id=post_id, id_type=id_type)
 
 
-@router.get("/complete_task_by_task_id/{_id}")
-async def complete_task_by_id(_id):
-    print(_id)
-    task_id = await mongo.get_task_id(_id)
-    print(task_id)
-    task = await mongo.get_task_by_id(task_id["task_id"])
-    print(task)
+
+@router.get("/start_task_by_id/{_id}")
+async def start_task_by_id(_id):
+    task = await mongo.get_task(_id)
     for i in task["channels_id"]:
-        await send_post(tg_name=i, post=task["post_id"])
+        try:
+            await send_post(post_id=task["post_id"], channel_id=i, id_type="tg")
+        except BaseException as e:
+            print(e)
+    return Response(None, status_code=status.HTTP_200_OK)
+
 
 
 @router.post("/create_tasks")
@@ -88,6 +90,7 @@ async def create_new_task(data_sc: models.post.Calendar = Body(...)):
         await rds.add_timer(i["_id"], secs)
     # print(var)
     ...
+
 
 
 @router.post("/create")
