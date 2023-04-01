@@ -99,7 +99,7 @@ class MongoQueries:
         return 0
 
 
-    async def update_channels(self, *, delete: list, add: list, modify: list) -> int:
+    async def update_channels(self, *, delete: list, add: list, modify: list) :
         errors = {"exists": []}
         for item in delete:
             result = await self.db["channels"].delete_one({"_id": item["_id"]})

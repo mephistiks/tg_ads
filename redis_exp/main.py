@@ -5,9 +5,9 @@ import requests
 #debug = 1, prod = 0
 type = 0
 if type:
-    base_link = "http://127.0.0.1:9898/api/complete_task_by_task_id"
+    base_link = "http://127.0.0.1:9898/api/start_task_by_id"
 else:
-    base_link = "http://fastapi:8000/api/complete_task_by_task_id"
+    base_link = "http://fastapi:8000/api/start_task_by_id"
 
 print("reids exp started")
 r = redis.StrictRedis("redis", 6379)

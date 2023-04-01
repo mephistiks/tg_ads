@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 
 
 class PostSchema(BaseModel):
-    channel_id: int = Field(...)
+    channel_id: int | str = Field(...)
     post_id: str = Field(...)
     id_type: str = Field(...)
 

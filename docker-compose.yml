@@ -7,7 +7,10 @@ services:
         restart: on-failure
         environment:
             - TZ=Europe/Moscow
-            - DBG=0
+            - DEBUG=0
+            - REDIS_HOST="redis"
+            - REDIS_PORT=6379
+            - MONGODB_LINK="mongodb://mongo:mongo@mongodb:27017/"
         networks:
             - niggers
         ports:

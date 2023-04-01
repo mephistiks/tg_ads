@@ -3,7 +3,7 @@ import os
 TG_TOKEN = "5996947797:AAEFjYd2cIhCtvbT3sk7zBCpPRtOmxA68gQ"
 
 #debug = 1, docker = 0
-type = os.getenv("DBG", True)
+type = os.getenv("DEBUG", True)
 
 if type == True: #debug
     redis_host = "localhost"

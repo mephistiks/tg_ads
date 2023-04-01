@@ -31,6 +31,7 @@ kb = None
 async def send_post(*, tg: str | int, post_id: str, id_type: str = "tg"):
     match id_type:
         case "tg":
+            print(1)
             _channel = await mongo.get_channel_by_tg_id(tg_id=tg)
         case "_id":
             _channel = await mongo.get_channel_by_id(_id=tg)
@@ -39,6 +40,7 @@ async def send_post(*, tg: str | int, post_id: str, id_type: str = "tg"):
         case _:
             raise Exception("channel id type error")
     post = await mongo.get_post_by_id(post_id)
+    print(_channel)
     tg_id = _channel.get("tg_id")
     ref = _channel.get("ref")
     text = post["post_text"].replace("{}", ref or "")
@@ -64,7 +66,7 @@ async def send_post_to_channel_handler(
 ):
     post_id = data_sc.post_id
     channel_id = data_sc.channel_id
-    id_type = data_sc.type
+    id_type = data_sc.id_type
     await send_post(tg=channel_id, post_id=post_id, id_type=id_type)
 
 
@@ -74,7 +76,7 @@ async def start_task_by_id(_id):
     task = await mongo.get_task(_id)
     for i in task["channels_id"]:
         try:
-            await send_post(post_id=task["post_id"], channel_id=i, id_type="tg")
+            await send_post(tg=i, post_id=task["post_id"], id_type="name")
         except BaseException as e:
             print(e)
     return Response(None, status_code=status.HTTP_200_OK)
@@ -88,14 +90,11 @@ async def create_new_task(data_sc: models.post.Calendar = Body(...)):
         secs = await utils.utls.get_seconds(i["exp"]["date"], i["exp"]["time"])
         print(secs)
         await rds.add_timer(i["_id"], secs)
-    # print(var)
-    ...
 
 
 
 @router.post("/create")
 async def create_new_post(data_sc: models.post.NewPostSchema = Body(...)):
-    data = jsonable_encoder(data_sc)
     img_name = await save_img(data_sc.img)
     _id = await mongo.save_post(post_name=data_sc.post_name,
                                 img_name=img_name,
