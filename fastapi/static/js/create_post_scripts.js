@@ -124,7 +124,6 @@ function btn_flow(id_btn){
 	buttons_ws_rendering();
 }
 
-let inputFile = new FormData();
 let f_pr_id = "";
 
 function pic_flow() {
@@ -144,7 +143,6 @@ function pic_flow() {
 		}
 		let preview = document.getElementById(f_pr_id);
 		preview.src = reader.result;
-		inputFile.append('file', document.getElementById('picInput').files[0]);
 	}
 	if(file){
 		reader.readAsDataURL(file);
@@ -156,7 +154,8 @@ function pic_flow() {
 }
 
 async function post_post(){
-	let file_name = await send_media(inputFile);
+	let file = document.getElementById('picInput').files[0];
+	let file_name = await send_media(file);
     let post_name = document.getElementById('post_name').value;
 	let post_text = document.getElementById('txtar_inp').value;
 	let post_buttons = new Array;
