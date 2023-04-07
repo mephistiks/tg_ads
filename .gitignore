@@ -115,6 +115,7 @@ celerybeat.pid
 .venv
 env/
 fastapi/venv/
+fastapi/venv2/
 ENV/
 env.bak/
 venv.bak/
