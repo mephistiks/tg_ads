@@ -24,7 +24,7 @@ async def pre_send_post(*, tg_data: dict, post: dict):
         tg_id = int("-100" + str(tg_id))
     ref = tg_data.get("ref")
     text = post.get("post_text").replace("{}", ref or "")
-    kb: None | types.InlineKeyboardMarkup = await utils.utls.get_keyboard(post["buttons"], ref)
+    kb: None | types.InlineKeyboardMarkup = await utils.utls.get_keyboard(post.get("buttons"), ref)
     file_name: str = post.get("file_name")
     if file_name.endswith(tuple(cfg.img_extensions)):
         await send_photo(tg_id=tg_id, file_name=file_name, text=text, kb=kb)

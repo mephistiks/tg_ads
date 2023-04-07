@@ -154,8 +154,11 @@ function pic_flow() {
 }
 
 async function post_post(){
-	let file = document.getElementById('picInput').files[0];
-	let file_name = await send_media(file);
+	const form = new FormData();
+	form.append("file", document.getElementById('picInput').files[0]);
+	//let file = document.getElementById('picInput').files[0];
+	let file_name = await send_media(form);
+	let new_file_name = file_name.replaceAll("\"", "");
     let post_name = document.getElementById('post_name').value;
 	let post_text = document.getElementById('txtar_inp').value;
 	let post_buttons = new Array;
@@ -166,7 +169,7 @@ async function post_post(){
 		}
 	}
 	let post_body = {
-		"file_name": file_name,
+		"file_name": new_file_name,
 		"post_name": post_name,
 		"post_text": post_text,
 		"buttons": post_buttons
