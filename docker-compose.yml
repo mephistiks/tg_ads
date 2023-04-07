@@ -11,6 +11,7 @@ services:
             - REDIS_HOST="redis"
             - REDIS_PORT=6379
             - MONGODB_LINK="mongodb://mongo:mongo@mongodb:27017/"
+            - HOST_URL="http://194.58.103.56:9898/"
         networks:
             - niggers
         ports:

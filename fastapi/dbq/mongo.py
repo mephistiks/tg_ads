@@ -30,13 +30,26 @@ class MongoQueries:
     async def stop(self) -> None:
         ...
 
-    async def save_post(self, post_name, img_name, post_text, buttons) -> str:
+    async def save_post_with_image(self, post_name, img_name, post_text, buttons) -> str:
         tmp = (img_name + str(time.time())).encode()
         _id = hashlib.md5(tmp).hexdigest()
         base = {
             "_id": _id,
             "post_name": post_name,
             "img_name": img_name,
+            "post_text": post_text,
+            "buttons": buttons
+        }
+        var = await self.db["posts"].insert_one(base)
+        return var.inserted_id
+
+    async def save_post_with_file(self, post_name, file_name, post_text, buttons) -> str:
+        tmp = (file_name + str(time.time())).encode()
+        _id = hashlib.md5(tmp).hexdigest()
+        base = {
+            "_id": _id,
+            "post_name": post_name,
+            "file_name": file_name,
             "post_text": post_text,
             "buttons": buttons
         }
