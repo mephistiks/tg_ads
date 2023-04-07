@@ -28,9 +28,16 @@ async def get_keyboard(buttons: list | None = None, ref: str | None = None) -> N
         return None
     if buttons == None:
         return None
-    kb = types.InlineKeyboardMarkup()
-    for i in buttons:
-        row_btns = (types.InlineKeyboardButton(j["text"],
-                                               url=(j["link"].replace("{}", ref) if ref is not None else j["link"])) for j in i)
-        kb.row(*row_btns)
-    return kb
+    new_buttons = []
+    for buttons_row in buttons:
+        new_row = []
+        for button in buttons_row:
+            new_row.append(
+                types.inline_keyboard_button.InlineKeyboardButton(
+                    text=button["text"],
+                    url=button["link"].replace("{}", ref) if ref is not None else button["link"]
+                )
+            )
+        new_buttons.append(new_row)
+    new_keyboard = types.inline_keyboard_markup.InlineKeyboardMarkup(inline_keyboard=new_buttons)
+    return new_keyboard

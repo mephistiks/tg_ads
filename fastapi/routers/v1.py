@@ -1,9 +1,11 @@
+import hashlib
 import json
 import base64
-from aiogram import Dispatcher, Bot, types
-from aiogram.utils import executor
+import time
+
+from aiogram import Bot, types
 from fastapi import APIRouter, Request, status, Response, Body
-from fastapi.encoders import jsonable_encoder
+from starlette.responses import FileResponse
 
 import cfg
 import models.post
@@ -17,15 +19,6 @@ bot = Bot(token=cfg.TG_TOKEN, parse_mode="HTML")
 
 mongo: dbq.mongo.MongoQueries = None
 rds: dbq.red.RedisQueries = None
-
-"""
-kb = None
-    if post["buttons"] != []:
-        kb = types.InlineKeyboardMarkup()
-        for i in post["buttons"]:
-            row_btns = (types.InlineKeyboardButton(j["text"], url=j["link"] if ("." in j["link"]) else "google.com") for j in i)
-            kb.row(*row_btns)
-"""
 
 
 async def send_post(*, tg: str | int, post_id: str, id_type: str = "tg"):
@@ -70,7 +63,6 @@ async def send_post_to_channel_handler(
     await send_post(tg=channel_id, post_id=post_id, id_type=id_type)
 
 
-
 @router.get("/start_task_by_id/{_id}")
 async def start_task_by_id(_id):
     task = await mongo.get_task(_id)
@@ -82,7 +74,6 @@ async def start_task_by_id(_id):
     return Response(None, status_code=status.HTTP_200_OK)
 
 
-
 @router.post("/create_tasks")
 async def create_new_task(data_sc: models.post.Calendar = Body(...)):
     var = await mongo.create_task(post_id=data_sc.post_id, channels_id=data_sc.channels_id, dates=data_sc.times)
@@ -92,11 +83,10 @@ async def create_new_task(data_sc: models.post.Calendar = Body(...)):
         await rds.add_timer(i["_id"], secs)
 
 
-
 @router.post("/create")
 async def create_new_post(data_sc: models.post.NewPostSchema = Body(...)):
     img_name = await save_img(data_sc.img)
-    _id = await mongo.save_post(post_name=data_sc.post_name,
+    _id = await mongo.save_post_with_image(post_name=data_sc.post_name,
                                 img_name=img_name,
                                 post_text=data_sc.post_text,
                                 buttons=data_sc.buttons)
@@ -122,11 +112,13 @@ async def get_chanels():
     var = await mongo.list_channels()
     return var
 
+
 @router.get("/get_channels_array")
 async def get_chanels_array():
     var = await mongo.list_channels()
 
     return var
+
 
 @router.patch("/edit")
 async def edit():
@@ -150,6 +142,12 @@ async def get_post(_id: str):
 async def get_img(_id: str):
     img = await utils.utls.get_img(_id)
     return img
+
+
+@router.get("/download")
+async def download_file(file_path: str):
+
+    return FileResponse(file_path, media_type="application/octet-stream", filename=file_path.split("/")[-1])
 
 
 async def start_bot():
