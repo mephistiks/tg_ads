@@ -70,8 +70,18 @@ function clear_all(){
     render_chbxs();
 }
 
+///<img class="preview_pic" id="pr_pic">
+
 function render_preview(post){
-    document.getElementById('pr_pic').setAttribute('src', post["img"]);
+    let piece_of_type = post["file_name"].slice(-3);
+    let ins_div = document.getElementById("pr_file_inp");
+    if(piece_of_type == "mp4"){
+        ins_div.innerHTML = "<video class='preview_pic' id='pr_pic'>";
+    }
+    else{
+        ins_div.innerHTML = "<img class='preview_pic' id='pr_pic'>";
+    }
+    document.getElementById('pr_pic').setAttribute('src', document.location.origin + "/files/" + post["file_name"]);
     let text = post["post_text"];
     let ret_text = "";
     for(let i = 0; i < text.length; i++){

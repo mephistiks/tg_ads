@@ -9,14 +9,6 @@ async function get_preview(){
         }
     });
     let result = await response.json();
-    console.log(result)
-    let img = await fetch(host + "/api/get_img/" + result["img_name"], {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    result["img"] = await img.json();
     let post = result;
     render_preview(post);
 }
