@@ -171,6 +171,10 @@ img.preview_pic{
 	width: 100%;
 }
 
+video.preview_pic{
+	width: 100%;
+}
+
 div.post_preview_text{
 	width: 100%;]
 }

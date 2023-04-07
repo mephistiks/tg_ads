@@ -16,7 +16,7 @@
         <div class="post_creating_workspace">
             <div class="add_pic">
                 <label>Загрузить изображение</label>
-                <input type="file" id="picInput" name="file" onchange="pic_flow()">
+                <input type="file" id="picInput" name="file" accept=".jpg, .jpeg, .png, .gif, .mp4" onchange="pic_flow()">
             </div>
             <div class="post_text">
                 <div><label>Текст поста</label></div>
@@ -45,8 +45,8 @@
         </div>
         <div class="post_creating_result">
             <div class="post_preview">
-                <div class="post_preview_pic">
-                    <img class="preview_pic" id="pr_pic">
+                <div class="post_preview_pic" id="pr_file">
+                    
                 </div>
                 <div class="post_preview_text">
                     <p id="pr_txt" class = "preview_text"></p>

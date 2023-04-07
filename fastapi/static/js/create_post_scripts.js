@@ -124,24 +124,40 @@ function btn_flow(id_btn){
 	buttons_ws_rendering();
 }
 
+let inputFile = new FormData();
+let f_pr_id = "";
+
 function pic_flow() {
-	let preview = document.getElementById('pr_pic');
+	let f_pr = document.getElementById("pr_file");
 	let file = document.getElementById('picInput').files[0];
 	let reader = new FileReader();
 	reader.onloadend = function (){
+		f_type = document.getElementById('picInput').files[0]["type"];
+		f_type = f_type.slice(0, 5);
+		if(f_type == "image"){
+			f_pr.innerHTML = "<img class='preview_pic' id='pr_pic'>";
+			f_pr_id = 'pr_pic';
+		}
+		else if(f_type == "video"){
+			f_pr.innerHTML = "<video class='preview_pic' id='pr_vid' controls>";
+			f_pr_id = 'pr_vid';
+		}
+		let preview = document.getElementById(f_pr_id);
 		preview.src = reader.result;
+		inputFile.append('file', document.getElementById('picInput').files[0]);
 	}
 	if(file){
 		reader.readAsDataURL(file);
-	} 
+	}
 	else{
+		let preview = document.getElementById(f_pr_id);
 		preview.src = "";
 	}
 }
 
-function post_post(){
-    let pic_b64 = document.getElementById('pr_pic').src;
-	let post_name = document.getElementById('post_name').value;
+async function post_post(){
+	let file_name = await send_media(inputFile);
+    let post_name = document.getElementById('post_name').value;
 	let post_text = document.getElementById('txtar_inp').value;
 	let post_buttons = new Array;
 	for(let i = 0; i < buttons_array.length; i++){
@@ -151,18 +167,10 @@ function post_post(){
 		}
 	}
 	let post_body = {
-		"img": pic_b64,
+		"file_name": file_name,
 		"post_name": post_name,
 		"post_text": post_text,
 		"buttons": post_buttons
 	};
-	///Добавь в кавычки ссылку на серв
-	let link_from_html = document.getElementById("tag_for_copy_to_js").innerHTML;
-	let link_ = "";
-	for(let i = 0, cntr = 0; i < link_from_html.length, cntr < 3; i++){
-		if(link_from_html[i] == "/")
-			cntr++;
-		link_ += link_from_html[i];
-	}
 	send_post_post(post_body);
 }
