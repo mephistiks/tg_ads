@@ -76,7 +76,7 @@ function render_preview(post){
     let piece_of_type = post["file_name"].slice(-3);
     let ins_div = document.getElementById("pr_file_inp");
     if(piece_of_type == "mp4"){
-        ins_div.innerHTML = "<video class='preview_pic' id='pr_pic'>";
+        ins_div.innerHTML = "<video controls class='preview_pic' id='pr_pic'>";
     }
     else{
         ins_div.innerHTML = "<img class='preview_pic' id='pr_pic'>";

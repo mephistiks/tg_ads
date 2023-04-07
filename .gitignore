@@ -2,6 +2,7 @@ fastapi/images/*
 fastapi/files/*
 !fastapi/files/_init_.py
 mongo/mongodata/*
+redis/redisdata/*
 fastapi/.idea
 fastapi/.idea/*
 .idea/*

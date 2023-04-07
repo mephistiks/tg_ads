@@ -5,6 +5,8 @@ services:
         command: "uvicorn app:app --host 0.0.0.0 --port 8000"
         build: ./fastapi
         restart: on-failure
+        volumes:
+            - ./fastapi/files:/usr/src/code/fastapi/files
         environment:
             - TZ=Europe/Moscow
             - DEBUG=0
@@ -34,6 +36,8 @@ services:
 
     redis:
         build: ./redis
+        volumes:
+        - ./redis/redisdata:/var/lib/redis
         ports:
             - "6500:6379"
         networks:

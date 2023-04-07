@@ -1,11 +1,9 @@
 import hashlib
 import time
 
-from fastapi import APIRouter, Request, status, Response, Body, UploadFile, File
-import cfg
+from fastapi import APIRouter, status, Response, Body, UploadFile, File
 from .models import NewPostSchema, PostSchema
 from .utls import pre_send_post
-import utils.utls
 import dbq
 
 router = APIRouter()
@@ -39,16 +37,16 @@ async def send_post_to_channel_handler(
         data_sc: PostSchema = Body(...),
 ):
     post_id = data_sc.post_id
-    # match id_type:
-    #    case "tg":
-    #        print(1)
-    #        _channel = await mongo.get_channel_by_tg_id(tg_id=tg)
-    #    case "_id":
-    #        _channel = await mongo.get_channel_by_id(_id=tg)
-    #    case "name":
-    #        _channel = await mongo.get_channel_by_name(name=tg)
-    #    case _:
-    #        raise Exception("channel id type error")
     post = await mongo.get_post_by_id(post_id)
     tg_data = await mongo.get_channel_by_name(name=data_sc.channel_id)
     await pre_send_post(tg_data=tg_data, post=post)
+
+
+@router.get("/start_task_by_id/{_id}")
+async def start_task_by_id(_id):
+    task = await mongo.get_task(_id)
+    post = await mongo.get_post_by_id(task["post_id"])
+    for i in task["channels_id"]:
+        tg_data = await mongo.get_channel_by_name(name=i)
+        await pre_send_post(tg_data=tg_data, post=post)
+    return Response(None, status_code=status.HTTP_200_OK)
