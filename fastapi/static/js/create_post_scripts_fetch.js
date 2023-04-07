@@ -1,5 +1,20 @@
+async function send_media(file){
+	let host = document.location.origin;
+	let response = await fetch(host + "/api/v2/upload", {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			"file": file
+		})
+	});
+	let result = await response.text();
+	return result;
+}
+
 async function send_post_post(post_body){
-    let host = document.location.origin
+    let host = document.location.origin;
 	let response = await fetch(host + "/api/create", {
 		method: 'POST',
 		headers: {
