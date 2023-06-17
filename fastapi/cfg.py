@@ -1,6 +1,6 @@
 import os
 
-TG_TOKEN = "5996947797:AAEFjYd2cIhCtvbT3sk7zBCpPRtOmxA68gQ"
+TG_TOKEN = ""
 
 img_extensions = ['.jpg', '.jpeg', '.png']
 gif_extensions = ['.gif']
